@@ -1,0 +1,24 @@
+% low ≡ dim
+act 
+    press,change,t: Duration;
+sort
+    State = struct off | low | bright;
+    Duration = struct lt5 | gt5;
+map
+    nextState: Duration # State-> State;
+var
+    d: Duration;
+eqn
+    nextState(d,off)          = low;
+    nextState(lt5,low)        = bright;
+    nextState(gt5,low)        = off;
+    nextState(d,bright)       = off;
+proc
+    User = sum d: Duration . press(d) . User;
+    Lamp(s:State) = sum d: Duration . change(d) . Lamp(nextState(d,s));
+
+init
+    allow(
+        {t},
+        comm({press|change -> t},User || Lamp(off))
+);
