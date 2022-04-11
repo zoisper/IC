@@ -89,10 +89,15 @@ proc Flashlight(pos:Position) =
 
 % Initial process definition: the system currently only consists of a
 % flashlight at the 'start' side.
-init  %Flashlight(start) ;
+init  
+%Flashlight(start) ;
 
 %%% TODO (Exercise 2):
 %%% Add the four Adventurer processes to this definition
+
+%%% TODO (Exercise 5):
+%%% Add the Referee process to this definition
+
 	allow
 	(
 		{forward,back,report},
@@ -107,5 +112,4 @@ init  %Flashlight(start) ;
 		)
 	);
 
-%%% TODO (Exercise 5):
-%%% Add the Referee process to this definition
+
