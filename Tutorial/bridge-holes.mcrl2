@@ -60,13 +60,7 @@ proc Flashlight(pos:Position) =
 %%% Add Adventurer process definition here
 	Adventurer(speed:Int,pos:Position) =
 		(pos == start) -> 
-			(
-				sum speed2:Int .(speed < speed2)->
-					forward_adventurer(speed,speed2) . Adventurer(speed,finish)
-					<>
-					forward_adventurer(speed2,speed) . Adventurer(speed,finish)
-			)
-									
+			sum speed2:Int . forward_adventurer(min(speed,speed2),max(speed, speed2)) . Adventurer(speed,finish)					
 			<>
 			back_adventurer(speed) . Adventurer(speed, start);
 			
