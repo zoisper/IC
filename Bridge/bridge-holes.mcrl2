@@ -47,13 +47,14 @@ act
 %    pair of adventurers.
 % 2. If it is at the 'finish' side, it can move back together with any
 %    adventurer.
-proc Flashlight(pos:Position) =
-       (pos == start) ->
-         	% Case 1.
-       	sum s,s':Int . forward_flashlight(s,s') . Flashlight(finish)
+proc 
+	Flashlight(pos:Position) =
+		(pos == start) ->
+         % Case 1.
+		sum s,s':Int . forward_flashlight(s,s') . Flashlight(finish)
        	<> 
-        	% Case 2.
-         	sum s:Int . back_flashlight(s) . Flashlight(start);
+        % Case 2.
+		sum s:Int . back_flashlight(s) . Flashlight(start);
 
 
 %%% TODO (Exercise 1):
@@ -75,7 +76,7 @@ proc Flashlight(pos:Position) =
 			(
 				(crossed < 4) ->
 					sum speed : Int . back_referee(speed) . Referee(start,time+speed,crossed-1)
-				<>
+					<>
 					report(time) . Referee(finish, time, crossed) 
 			);
 			
@@ -101,7 +102,7 @@ init
 				forward_flashlight | forward_adventurer |forward_adventurer | forward_referee -> forward,
 				back_flashlight | back_adventurer | back_referee -> back	
 			},
-		Flashlight(start) || Adventurer(1,start) || Adventurer(2,start) || Adventurer(5,start) || Adventurer(10,start) || Referee(start,0,0)
+			Flashlight(start) || Adventurer(1,start) || Adventurer(2,start) || Adventurer(5,start) || Adventurer(10,start) || Referee(start,0,0)
 
 		)
 	);
